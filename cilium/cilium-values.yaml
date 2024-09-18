@@ -19,7 +19,9 @@ ipv4NativeRoutingCIDR: 10.244.0.0/16
 ingressController:
   enabled: true
   loadbalancerMode: dedicated
+  default: true
 
-kubeProxyReplacement: true
+NodePort:
+  enabled: true
 
 
