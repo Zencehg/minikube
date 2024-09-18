@@ -1,0 +1,25 @@
+# cilium-values.yaml
+cluster:
+  name: minikube
+
+ipv4:
+  enabled: true
+ipv6:
+  enabled: false
+
+ipam:
+  mode: kubernetes
+
+
+
+# Cilium Routing
+routingMode: native
+ipv4NativeRoutingCIDR: 10.244.0.0/16
+
+# ingressController:
+#   enabled: true
+#   loadbalancerMode: dedicated
+
+# kubeProxyReplacement: true
+
+

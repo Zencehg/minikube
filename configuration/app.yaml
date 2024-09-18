@@ -1,0 +1,9 @@
+---
+nginx:
+  namespace: nginx
+  chart: './nginx-test'
+  port: 80
+httpd: 
+  namespace: apache
+  chart: './httpd-test'
+  port: 80
