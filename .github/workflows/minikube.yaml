@@ -63,7 +63,7 @@ jobs:
       run: |
         kubectl apply -f cilium/ingress.yaml
         kubectl get ingress -A
-        helm upgrade -n kube-system cilium cilium/cilium -f cilium/cilium-values.yaml--set l2announcements.enabled=true --set externalIPs.enabled=true --set devices=eth+
+        helm upgrade -n kube-system cilium cilium/cilium -f cilium/cilium-values.yaml --set l2announcements.enabled=true --set externalIPs.enabled=true --set devices=eth+
         kubectl -n kube-system rollout restart deployment/cilium-operator
         kubectl -n kube-system rollout restart ds/cilium
         kubectl apply -f cilium/policy.yaml
