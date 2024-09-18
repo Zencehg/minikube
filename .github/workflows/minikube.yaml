@@ -20,7 +20,7 @@ jobs:
     - name: Start minikube
       uses: medyagh/setup-minikube@latest
 
-    - name: Checking cluster
+    - name: Checking cluster / Creation of namespaces
       run: |
         kubectl get pods -A
         kubectl create namespace nginx
@@ -30,7 +30,7 @@ jobs:
       uses: azure/setup-helm@v4.2.0
       id: install
 
-    - name: Run the app installation script
+    - name: Cilium installation
       shell: pwsh
       run: |
         helm repo add cilium https://helm.cilium.io/
@@ -41,10 +41,18 @@ jobs:
         kubectl get configmaps -n kube-system kubeadm-config -o yaml
         kubectl -n kube-system exec ds/cilium -- cilium-dbg status
         kubectl get ingress -A
-        kubectl get svc -A
+        kubectl get service -A
 
+    - name: Cilium LB config
+      shell: pwsh
+      run: |
+        kubectl apply -f cilium/pool.yaml
+        kubectl -n kube-system rollout restart deployment/cilium-operator
+        kubectl -n kube-system rollout restart ds/cilium
+        sleep 10
+        kubectl get service -A -o json | ConvertFrom-Json
 
-    - name: Run the app installation script
+    - name: Run the web app installation script
       shell: pwsh
       run: |
         .\scripts\InstallationScript.ps1 -app ${{ github.event.inputs.appname }} -path '.'
@@ -53,5 +61,6 @@ jobs:
       run: | 
         kubectl get pods -A
         kubectl get deployment -A
-        kubectl get service -A
+        ((kubectl get service -A -o json | ConvertFrom-Json).items | where {$_.metadata.name -eq 'nginx'}).status
+        ((kubectl get service -A -o json | ConvertFrom-Json).items | where {$_.metadata.name -eq 'nginx'}).spec
 
