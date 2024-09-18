@@ -16,10 +16,10 @@ ipam:
 routingMode: native
 ipv4NativeRoutingCIDR: 10.244.0.0/16
 
-# ingressController:
-#   enabled: true
-#   loadbalancerMode: dedicated
+ingressController:
+  enabled: true
+  loadbalancerMode: dedicated
 
-# kubeProxyReplacement: true
+kubeProxyReplacement: true
 
 

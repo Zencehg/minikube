@@ -31,12 +31,21 @@ jobs:
       uses: azure/setup-helm@v4.2.0
       id: install
 
-    - name: Run the installation script
+    - name: Run the app installation script
+      shell: pwsh
+      run: |
+        helm install -n kube-system cilium cilium/cilium -f cilium/cilium-values.yaml
+        sleep 10
+        kubectl get daemonsets -n kube-system
+        kubectl get po -A
+        kubectl get configmaps -n kube-system kubeadm-config -o yaml
+        kubectl -n kube-system exec ds/cilium -- cilium-dbg status
+
+
+    - name: Run the app installation script
       shell: pwsh
       run: |
         .\scripts\InstallationScript.ps1 -app ${{ github.event.inputs.appname }} -path '.'
-      # env:
-      #   APP: ${{ github.event.inputs.AppName }}
 
     - name: Checking cluster
       run: kubectl get pods -A

@@ -2,7 +2,7 @@
 Hosting for minikube use case 
 
 Notes:
-
+```text
 # Windows 11 minikube installation with WSL and Docker:
 PS C:\Windows\system32> kubectl get po -A
 NAMESPACE     NAME                               READY   STATUS    RESTARTS      AGE
@@ -93,3 +93,4 @@ helm install nginx ngnix-test -n nginx
 # add repo for httpd
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
+```
