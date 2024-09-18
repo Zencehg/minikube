@@ -3,7 +3,7 @@ name: Deploy to Minikube using GitHub Actions
 on:
   workflow_dispatch:
     inputs: 
-      AppName:
+      appname:
         type: choice
         description: Name of the application
         options: 
@@ -25,6 +25,7 @@ jobs:
         kubectl get pods -A
         kubectl create namespace nginx
         kubectl create namespace apache
+        echo "${{ github.event.inputs.appname }}"
 
     - name: Install Helm 
       uses: azure/setup-helm@v4.2.0
@@ -33,9 +34,9 @@ jobs:
     - name: Run the installation script
       shell: pwsh
       run: |
-        .\scripts\InstallationScript.ps1 -app "$APP" -path '.'
-      env:
-        APP: ${{ github.event.inputs.AppName }}
+        .\scripts\InstallationScript.ps1 -app ${{ github.event.inputs.appname }} -path '.'
+      # env:
+      #   APP: ${{ github.event.inputs.AppName }}
 
     - name: Checking cluster
       run: kubectl get pods -A
