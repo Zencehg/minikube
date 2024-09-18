@@ -58,6 +58,12 @@ jobs:
       run: |
         .\scripts\InstallationScript.ps1 -app ${{ github.event.inputs.appname }} -path '.'
 
+    - name: Run the web app installation script
+      shell: pwsh
+      run: |
+        kubectl apply -f cilium/ingress.yaml
+        kubectl get ingress -A
+
     - name: Checking cluster
       shell: pwsh
       run: | 

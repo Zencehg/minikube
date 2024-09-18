@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: basic-ingress
+  namespace: default
+spec:
+  ingressClassName: cilium
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: nginx-chart
+            port:
+              number: 8080
+        path: /details
+        pathType: Prefix
+      - backend:
+          service:
+            name: httpd-chart
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
