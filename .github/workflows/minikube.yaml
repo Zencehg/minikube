@@ -58,7 +58,7 @@ jobs:
       run: |
         .\scripts\InstallationScript.ps1 -app ${{ github.event.inputs.appname }} -path '.'
 
-    - name: Run the web app installation script
+    - name: Apply basic ingress
       shell: pwsh
       run: |
         kubectl apply -f cilium/ingress.yaml
@@ -83,7 +83,13 @@ jobs:
         else {
         .\scripts\InstallationScript.ps1 -app 'nginx' -path '.'
         }
-        
+
+    - name: Apply basic ingress
+      shell: pwsh
+      run: |
+        kubectl apply -f cilium/ingress.yaml
+        kubectl get ingress -A
+
     - name: Checking cluster for new app
       shell: pwsh
       run: | 
