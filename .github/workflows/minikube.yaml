@@ -10,11 +10,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # - name: Start minikube
-    #   uses: medyagh/setup-minikube@latest
+    - name: Start minikube
+      uses: medyagh/setup-minikube@latest
 
-    # - name: Checking cluster
-    #   run: kubectl get pods -A
+    - name: Checking cluster
+      run: kubectl get pods -A
 
     - name: Install Helm 
       uses: azure/setup-helm@v4.2.0
@@ -22,7 +22,8 @@ jobs:
 
     - name: Run the installation script
       shell: pwsh
-      working-directory: configuration
       run: |
-        ls
-        helm version
+        .\scripts\InstallationScript.ps1 -app httpd -path '.'
+
+    - name: Checking cluster
+      run: kubectl get pods -A
