@@ -16,7 +16,7 @@ Param(
 )
 
 Set-Location -Path $path
-Install-Module powershell-yaml -Confirm -Scope CurrentUser
+Install-Module powershell-yaml -Confirm:$False -Force -Scope CurrentUser
 Import-Module powershell-yaml
 
 $config = Get-Content configuration\app.yaml | ConvertFrom-Yaml
