@@ -74,7 +74,7 @@ jobs:
         .\scripts\InstallationScript.ps1 -app 'httpd' -path '.'
         } 
         else {
-        .\scripts\InstallationScript.ps1 -app 'httpd' -path '.'
+        .\scripts\InstallationScript.ps1 -app 'nginx' -path '.'
         }
         
 
