@@ -8,7 +8,23 @@ jobs:
     runs-on: ubuntu-latest
     name: deploy minikube
     steps:
-    - name: Start minikube
-      uses: medyagh/setup-minikube@latest
-    - name: Try the cluster!
-      run: kubectl get pods -A
+    - uses: actions/checkout@v4
+
+    # - name: Start minikube
+    #   uses: medyagh/setup-minikube@latest
+
+    # - name: Checking cluster
+    #   run: kubectl get pods -A
+
+    - name: Install Helm 
+      uses: azure/setup-helm@v4.2.0
+      with:
+         version: default
+      id: install
+
+    - name: Run the installation script
+      shell: pwsh
+      working-directory: configuration
+      run: |
+        ls
+        helm version
