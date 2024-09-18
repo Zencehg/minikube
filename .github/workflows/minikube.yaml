@@ -2,12 +2,13 @@ name: Deploy to Minikube using GitHub Actions
 
 on:
   workflow_dispatch:
-    AppName:
-      type: choice
-      description: Name of the application
-      options: 
-      - nginx
-      - httpd
+    inputs: 
+      AppName:
+        type: choice
+        description: Name of the application
+        options: 
+        - nginx
+        - httpd
   
 jobs:
   job1:
