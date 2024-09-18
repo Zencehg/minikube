@@ -63,9 +63,10 @@ jobs:
         sleep 10
         kubectl get pods -A
         kubectl get deployment -A
+        kubectl get service -A 
         kubectl get service -A -o json | ConvertFrom-Json
-        ((kubectl get service -A -o json | ConvertFrom-Json).items | where {$_.metadata.name -eq 'nginx'}).status
-        ((kubectl get service -A -o json | ConvertFrom-Json).items | where {$_.metadata.name -eq 'nginx'}).spec
+        ((kubectl get service -A -o json | ConvertFrom-Json).items | where {$_.metadata.name -eq "${{ github.event.inputs.appname }}-chart"}).status
+        ((kubectl get service -A -o json | ConvertFrom-Json).items | where {$_.metadata.name -eq "${{ github.event.inputs.appname }}-chart"}).spec
 
     - name: Switch the web app
       shell: pwsh
