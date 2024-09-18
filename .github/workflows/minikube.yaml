@@ -34,6 +34,7 @@ jobs:
     - name: Run the app installation script
       shell: pwsh
       run: |
+        helm repo add cilium https://helm.cilium.io/
         helm install -n kube-system cilium cilium/cilium -f cilium/cilium-values.yaml
         sleep 10
         kubectl get daemonsets -n kube-system
