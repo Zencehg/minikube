@@ -40,7 +40,8 @@ jobs:
         kubectl get po -A
         kubectl get configmaps -n kube-system kubeadm-config -o yaml
         kubectl -n kube-system exec ds/cilium -- cilium-dbg status
-        kubectl get ingress
+        kubectl get ingress -A
+        kubectl get svc -A
 
 
     - name: Run the app installation script
