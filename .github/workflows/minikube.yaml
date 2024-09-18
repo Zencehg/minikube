@@ -66,3 +66,14 @@ jobs:
         ((kubectl get service -A -o json | ConvertFrom-Json).items | where {$_.metadata.name -eq 'nginx'}).status
         ((kubectl get service -A -o json | ConvertFrom-Json).items | where {$_.metadata.name -eq 'nginx'}).spec
 
+    - name: Switch the web app
+      shell: pwsh
+      run: |
+        if ("${{ github.event.inputs.appname }}" -eq 'nginx') {
+        .\scripts\InstallationScript.ps1 -app 'httpd' -path '.'
+        } 
+        else {
+        .\scripts\InstallationScript.ps1 -app 'httpd' -path '.'
+        }
+        
+
