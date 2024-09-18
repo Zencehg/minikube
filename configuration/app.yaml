@@ -2,8 +2,8 @@
 nginx:
   namespace: nginx
   chart: './nginx-test'
-  port: 8080
+  port: 80
 httpd: 
   namespace: apache
   chart: './httpd-test'
-  port: 8080
+  port: 80

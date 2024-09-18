@@ -12,13 +12,13 @@ spec:
           service:
             name: nginx-chart
             port:
-              number: 8080
+              number: 80
         path: /
         pathType: Prefix
       - backend:
           service:
             name: httpd-chart
             port:
-              number: 8080
+              number: 80
         path: /
         pathType: Prefix
