@@ -32,7 +32,9 @@ jobs:
     - name: Run the installation script
       shell: pwsh
       run: |
-        .\scripts\InstallationScript.ps1 -app "${{ github.event.inputs.name }}" -path '.'
+        .\scripts\InstallationScript.ps1 -app "$APP" -path '.'
+      env:
+        APP: ${{ github.event.inputs.name }}
 
     - name: Checking cluster
       run: kubectl get pods -A
