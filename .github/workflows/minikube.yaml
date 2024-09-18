@@ -35,7 +35,7 @@ jobs:
       run: |
         .\scripts\InstallationScript.ps1 -app "$APP" -path '.'
       env:
-        APP: ${{ github.event.inputs.name }}
+        APP: ${{ github.event.inputs.AppName }}
 
     - name: Checking cluster
       run: kubectl get pods -A
