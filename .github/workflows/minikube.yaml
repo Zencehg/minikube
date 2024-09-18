@@ -2,6 +2,12 @@ name: Deploy to Minikube using GitHub Actions
 
 on:
   workflow_dispatch:
+    AppName:
+    type: choice
+    description: Name of the application
+    options: 
+    - nginx
+    - httpd
   
 jobs:
   job1:
@@ -14,7 +20,10 @@ jobs:
       uses: medyagh/setup-minikube@latest
 
     - name: Checking cluster
-      run: kubectl get pods -A
+      run: |
+        kubectl get pods -A
+        kubectl create namespace nginx
+        kubectl create namespace apache
 
     - name: Install Helm 
       uses: azure/setup-helm@v4.2.0
@@ -23,7 +32,7 @@ jobs:
     - name: Run the installation script
       shell: pwsh
       run: |
-        .\scripts\InstallationScript.ps1 -app httpd -path '.'
+        .\scripts\InstallationScript.ps1 -app "${{ github.event.inputs.name }}" -path '.'
 
     - name: Checking cluster
       run: kubectl get pods -A
