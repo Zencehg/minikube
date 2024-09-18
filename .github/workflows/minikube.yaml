@@ -58,6 +58,7 @@ jobs:
         .\scripts\InstallationScript.ps1 -app ${{ github.event.inputs.appname }} -path '.'
 
     - name: Checking cluster
+      shell: pwsh
       run: | 
         sleep 10
         kubectl get pods -A
