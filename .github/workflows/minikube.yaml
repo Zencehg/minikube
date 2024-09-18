@@ -36,7 +36,7 @@ jobs:
       run: |
         helm repo add cilium https://helm.cilium.io/
         helm install -n kube-system cilium cilium/cilium -f cilium/cilium-values.yaml
-        sleep 10
+        sleep 20
         kubectl get daemonsets -n kube-system
         kubectl get po -A
         kubectl get configmaps -n kube-system kubeadm-config -o yaml
