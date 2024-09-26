@@ -77,9 +77,7 @@ jobs:
         kubectl get service -A
         ((kubectl get service -A -o json | ConvertFrom-Json).items | where {$_.metadata.name -eq "${{ github.event.inputs.appname }}-chart"}).status
         ((kubectl get service -A -o json | ConvertFrom-Json).items | where {$_.metadata.name -eq "${{ github.event.inputs.appname }}-chart"}).spec
-        minikube ip
-        curl http://10.42.42.1
-        curl http://10.42.42.2
+        curl http://192.168.49.2:31495
 
     - name: Switch the web app
       shell: pwsh
